@@ -1,8 +1,8 @@
 {
-  "name": "w6",
+  "name": "streaming_app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.ts",
   "scripts": {
     "start": "node build/server.js",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
@@ -15,8 +15,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
     "@types/jasmine": "^4.3.1",
+    "@types/jsonwebtoken": "^9.0.1",
     "@types/node": "^18.13.0",
     "@types/pg": "^8.6.6",
     "jasmine": "^4.5.0",
@@ -28,12 +31,15 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
     "db-migrate": "^0.11.13",
     "db-migrate-pg": "^1.2.2",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jasmine-es6-promise-matchers": "^2.1.2",
+    "jsonwebtoken": "^9.0.0",
     "pg": "^8.9.0"
   }
 }
