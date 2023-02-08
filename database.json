@@ -1,0 +1,17 @@
+{
+    "dev": {
+      "driver": "pg",
+      "host": "127.0.0.1",
+      "database": "task_dev",
+      "user": "task_user",
+      "password": "password123"
+    },
+    "test": {
+      "driver": "pg",
+      "host": "127.0.0.1",
+      "database": "task_test",
+      "user": "task_user",
+      "password": "password123"
+    }
+  }
+  
