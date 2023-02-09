@@ -52,7 +52,7 @@ export class UserStore {
         // @ts-ignore
         const conn = await Client.connect()       
         //     id,first_name,last_name,balance,email,password
-        const sql = 'INSERT INTO users ( first_name,last_name,balance,email,password) VALUES($1, $2, $3) RETURNING *'
+        const sql = 'INSERT INTO users ( first_name,last_name,balance,email,password) VALUES($1, $2, $3, $4) RETURNING *'
         const result = await conn.query(sql, [p.first_name, p.last_name, p.balance,p.email,p.password])
         const User = result.rows[0]
         conn.release()
@@ -60,6 +60,22 @@ export class UserStore {
     }
     catch (err) {
         throw new Error(`Could not add new user ${p.first_name+' '+p.last_name}. Error: ${err}`)
+    }
+  }
+
+  async update(p: User): Promise<User> {
+    try {
+        // @ts-ignore
+        const conn = await Client.connect()       
+        //     id,first_name,last_name,balance,email,password
+        const sql ='Update users set first_name = $2,last_name = $3 , balance= $4,email= $5,password= $6 where id =$1  RETURNING *'
+        const result = await conn.query(sql, [p.id,p.first_name, p.last_name, p.balance,p.email,p.password])
+        const User = result.rows[0]
+        conn.release()
+        return User
+    }
+    catch (err) {
+        throw new Error(`Could not update new user ${p.first_name+' '+p.last_name}. Error: ${err}`)
     }
   }
 
@@ -77,4 +93,6 @@ export class UserStore {
         throw new Error(`Could not delete user ${id}. Error: ${err}`)
     }
   }
+
+
 }
