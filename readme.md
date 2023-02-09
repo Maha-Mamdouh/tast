@@ -21,6 +21,10 @@ To use this project, first install express framework, and other backages using t
 
     npm i --save-dev @types/express @types/jasmine @types/node @types/pg jasmine jasmine-spec-reporter jasmine-ts nodemon ts-node tsc-watch typescript @types/bcrypt @types/cors @types/jsonwebtoken 
 
+or
+
+    npm install
+
 
 ## Usage
 
