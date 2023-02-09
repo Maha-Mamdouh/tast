@@ -12,7 +12,7 @@ app.get('/', function (req: express.Request, res: express.Response) {
     res.send('Hello World!')
 });
 
-app.use('/',UserRoutes)
+UserRoutes(app)
 
 
 app.listen(3000, function () {

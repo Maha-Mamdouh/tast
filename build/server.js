@@ -12,7 +12,7 @@ app.use(body_parser_1.default.json());
 app.get('/', function (req, res) {
     res.send('Hello World!');
 });
-app.use('/', userRoutes_1.default);
+(0, userRoutes_1.default)(app);
 app.listen(3000, function () {
     console.log(`starting app on: ${address}`);
 });
