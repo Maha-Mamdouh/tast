@@ -109,7 +109,6 @@ var update = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                     name: req.body.name,
                     release_date: req.body.release_date
                 };
-                console.log(movie);
                 return [4 /*yield*/, store.update(movie)];
             case 1:
                 updateMovie = _a.sent();

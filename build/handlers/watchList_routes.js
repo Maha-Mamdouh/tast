@@ -37,12 +37,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var watchLists_1 = require("../models/watchLists");
-var store = new watchLists_1.userList();
+var list = new watchLists_1.userList();
 var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var movies;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, store.index()];
+            case 0: return [4 /*yield*/, list.index()];
             case 1:
                 movies = _a.sent();
                 res.json(movies);
@@ -54,7 +54,7 @@ var show = function (req, res) { return __awaiter(void 0, void 0, void 0, functi
     var movie;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, store.show(req.params.id)];
+            case 0: return [4 /*yield*/, list.show(req.params.id)];
             case 1:
                 movie = _a.sent();
                 res.json(movie);

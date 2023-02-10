@@ -83,7 +83,6 @@ var UserStore = /** @class */ (function () {
                         return [4 /*yield*/, conn.query(sql, [id])];
                     case 2:
                         result = _a.sent();
-                        console.log(result);
                         conn.release();
                         if (result.rows[0] == undefined) {
                             throw new Error("Could not find user ".concat(id, " empty table"));
@@ -134,16 +133,16 @@ var UserStore = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 3, , 4]);
-                        return [4 /*yield*/, database_1["default"].connect()];
+                        return [4 /*yield*/, database_1["default"].connect()
+                            //     id,first_name,last_name,balance,email,password
+                        ];
                     case 1:
                         conn = _a.sent();
-                        console.log(conn);
                         sql = 'Update users set first_name = $2,last_name = $3 , balance= $4,email= $5,password= $6 where id =$1  RETURNING *';
                         return [4 /*yield*/, conn.query(sql, [u.id, u.first_name, u.last_name, u.balance, u.email, u.password])];
                     case 2:
                         result = _a.sent();
                         user = result.rows[0];
-                        console.log(user);
                         conn.release();
                         return [2 /*return*/, user];
                     case 3:

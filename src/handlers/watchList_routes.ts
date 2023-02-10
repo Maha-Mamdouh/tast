@@ -1,15 +1,15 @@
 import express, { Request, Response } from 'express'
 import { List, userList } from '../models/watchLists'
 
-const store = new userList()
+const list = new userList()
 
 const index = async (_req: Request, res: Response) => {
-  const movies = await store.index()
+  const movies = await list.index()
   res.json(movies)
 }
 
 const show = async (req: Request, res: Response) => {
-   const movie = await store.show(req.params.id)
+   const movie = await list.show(req.params.id)
    res.json(movie)
 }
 

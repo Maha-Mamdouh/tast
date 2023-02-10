@@ -83,7 +83,6 @@ var userList = /** @class */ (function () {
                         return [4 /*yield*/, conn.query(sql, [id])];
                     case 2:
                         result = _a.sent();
-                        console.log(result);
                         conn.release();
                         if (result.rows[0] == undefined) {
                             return [2 /*return*/, "Could not find id ".concat(id, " in empty table")];

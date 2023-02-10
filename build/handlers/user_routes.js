@@ -107,8 +107,6 @@ var update = function (req, res) { return __awaiter(void 0, void 0, void 0, func
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                //p.first_name, p.last_name, p.balance,p.email,p.password
-                console.log('here');
                 user = {
                     id: req.params.id,
                     first_name: req.body.first_name,
@@ -117,7 +115,6 @@ var update = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                     email: req.body.email,
                     password: req.body.password
                 };
-                console.log(user);
                 return [4 /*yield*/, store.update(user)];
             case 1:
                 updateUser = _a.sent();

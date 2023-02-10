@@ -83,7 +83,6 @@ var MovieStore = /** @class */ (function () {
                         return [4 /*yield*/, conn.query(sql, [id])];
                     case 2:
                         result = _a.sent();
-                        console.log(result);
                         conn.release();
                         if (result.rows[0] == undefined) {
                             throw new Error("Could not find movie ".concat(id, " in empty table"));
@@ -135,13 +134,11 @@ var MovieStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        console.log(conn);
                         sql = 'Update movies set name = $2,release_date = $3 where id =$1  RETURNING *';
                         return [4 /*yield*/, conn.query(sql, [m.id, m.name, m.release_date])];
                     case 2:
                         result = _a.sent();
                         movie = result.rows[0];
-                        console.log(movie);
                         conn.release();
                         return [2 /*return*/, movie];
                     case 3:
