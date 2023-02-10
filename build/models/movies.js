@@ -109,7 +109,7 @@ var MovieStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'INSERT INTO movies ( name,release_date) VALUES($1, $2) RETURNING *';
+                        sql = 'INSERT INTO movies ( name, release_date) VALUES($1, $2) RETURNING *';
                         return [4 /*yield*/, conn.query(sql, [m.name, m.release_date])];
                     case 2:
                         result = _a.sent();
@@ -134,7 +134,7 @@ var MovieStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'Update movies set name = $2,release_date = $3 where id =$1  RETURNING *';
+                        sql = 'Update movies set name = $2, release_date = $3 where id =$1  RETURNING *';
                         return [4 /*yield*/, conn.query(sql, [m.id, m.name, m.release_date])];
                     case 2:
                         result = _a.sent();

@@ -46,8 +46,8 @@ export class MovieStore {
   async create(m: Movie): Promise<Movie> {
     try {
         // @ts-ignore
-        const conn = await Client.connect()       
-        const sql = 'INSERT INTO movies ( name,release_date) VALUES($1, $2) RETURNING *'
+        const conn = await Client.connect()  
+        const sql = 'INSERT INTO movies ( name, release_date) VALUES($1, $2) RETURNING *'
         const result = await conn.query(sql, [m.name, m.release_date])
         const movie = result.rows[0]
         conn.release()
@@ -62,8 +62,8 @@ export class MovieStore {
     try {
         // @ts-ignore
         const conn = await Client.connect() 
-        const sql ='Update movies set name = $2,release_date = $3 where id =$1  RETURNING *'
-        const result = await conn.query(sql, [m.id,m.name, m.release_date])
+        const sql ='Update movies set name = $2, release_date = $3 where id =$1  RETURNING *'
+        const result = await conn.query(sql, [m.id, m.name, m.release_date])
         const movie = result.rows[0]
         conn.release()
         return movie
