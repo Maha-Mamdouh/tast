@@ -4,20 +4,19 @@ import { User, UserStore } from '../models/users'
 const store = new UserStore()
 
 const index = async (_req: Request, res: Response) => {
-
   const users = await store.index()
   res.json(users)
 }
 
 const show = async (req: Request, res: Response) => {
-   const User = await store.show(req.params.id)
-   res.json(User)
+   const user = await store.show(req.params.id)
+   res.json(user)
 }
 
 const create = async (req: Request, res: Response) => {
     try {
         //p.first_name, p.last_name, p.balance,p.email,p.password
-        const User: User = {
+        const user: User = {
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             balance: req.body.balance,
@@ -25,7 +24,7 @@ const create = async (req: Request, res: Response) => {
             password:req.body.password
         }
 
-        const newUser = await store.create(User)
+        const newUser = await store.create(user)
         res.json(newUser)
     } catch(err) {
         res.status(400)
@@ -41,15 +40,17 @@ const destroy = async (req: Request, res: Response) => {
 const update = async (req: Request, res: Response) => {
     try {
         //p.first_name, p.last_name, p.balance,p.email,p.password
-        const User: User = {
-            id:req.body.id,
+        console.log('here')
+        const user: User = {
+            id: (req.params.id as unknown) as number,
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             balance: req.body.balance,
             email: req.body.email,
             password:req.body.password
         }
-        const updateUser = await store.update(User)
+        console.log(user)
+        const updateUser = await store.update(user)
         res.json(updateUser)
     } catch(err) {
         res.status(400)
@@ -66,4 +67,4 @@ const UserRoutes = (app: express.Application) => {
   app.patch('/users/:id', update)
 }
 
-export default UserRoutes
+export default UserRoutes 

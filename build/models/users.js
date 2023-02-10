@@ -26,6 +26,7 @@ class UserStore {
             const conn = await database_1.default.connect();
             const sql = 'SELECT * FROM users WHERE id=($1)';
             const result = await conn.query(sql, [id]);
+            console.log(result);
             conn.release();
             if (result.rows[0] == undefined) {
                 throw new Error(`Could not find user ${id} empty table`);
@@ -45,9 +46,9 @@ class UserStore {
             //     id,first_name,last_name,balance,email,password
             const sql = 'INSERT INTO users ( first_name,last_name,balance,email,password) VALUES($1, $2, $3, $4) RETURNING *';
             const result = await conn.query(sql, [p.first_name, p.last_name, p.balance, p.email, p.password]);
-            const User = result.rows[0];
+            const user = result.rows[0];
             conn.release();
-            return User;
+            return user;
         }
         catch (err) {
             throw new Error(`Could not add new user ${p.first_name + ' ' + p.last_name}. Error: ${err}`);
@@ -57,12 +58,14 @@ class UserStore {
         try {
             // @ts-ignore
             const conn = await database_1.default.connect();
+            console.log(conn);
             //     id,first_name,last_name,balance,email,password
             const sql = 'Update users set first_name = $2,last_name = $3 , balance= $4,email= $5,password= $6 where id =$1  RETURNING *';
             const result = await conn.query(sql, [p.id, p.first_name, p.last_name, p.balance, p.email, p.password]);
-            const User = result.rows[0];
+            const user = result.rows[0];
+            console.log(user);
             conn.release();
-            return User;
+            return user;
         }
         catch (err) {
             throw new Error(`Could not update new user ${p.first_name + ' ' + p.last_name}. Error: ${err}`);

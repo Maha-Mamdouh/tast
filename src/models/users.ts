@@ -33,6 +33,7 @@ export class UserStore {
         const conn = await Client.connect()
         const sql = 'SELECT * FROM users WHERE id=($1)'
         const result = await conn.query(sql, [id])
+        console.log(result)
         conn.release()
         if(result.rows[0] ==undefined){
             throw new Error(`Could not find user ${id} empty table`)
@@ -47,35 +48,38 @@ export class UserStore {
   }
  
   
-  async create(p: User): Promise<User> {
+  async create(u: User): Promise<User> {
     try {
         // @ts-ignore
         const conn = await Client.connect()       
         //     id,first_name,last_name,balance,email,password
         const sql = 'INSERT INTO users ( first_name,last_name,balance,email,password) VALUES($1, $2, $3, $4) RETURNING *'
-        const result = await conn.query(sql, [p.first_name, p.last_name, p.balance,p.email,p.password])
-        const User = result.rows[0]
+        const result = await conn.query(sql, [u.first_name, u.last_name, u.balance,u.email,u.password])
+        const user = result.rows[0]
         conn.release()
-        return User
+        return user
     }
     catch (err) {
-        throw new Error(`Could not add new user ${p.first_name+' '+p.last_name}. Error: ${err}`)
+        throw new Error(`Could not add new user ${u.first_name+' '+u.last_name}. Error: ${err}`)
     }
   }
 
-  async update(p: User): Promise<User> {
+  async update(u: User): Promise<User> {
     try {
         // @ts-ignore
-        const conn = await Client.connect()       
+        const conn = await Client.connect() 
+        console.log(conn)      
         //     id,first_name,last_name,balance,email,password
         const sql ='Update users set first_name = $2,last_name = $3 , balance= $4,email= $5,password= $6 where id =$1  RETURNING *'
-        const result = await conn.query(sql, [p.id,p.first_name, p.last_name, p.balance,p.email,p.password])
-        const User = result.rows[0]
+
+        const result = await conn.query(sql, [u.id,u.first_name, u.last_name, u.balance,u.email,u.password])
+        const user = result.rows[0]
+        console.log(user)
         conn.release()
-        return User
+        return user
     }
     catch (err) {
-        throw new Error(`Could not update new user ${p.first_name+' '+p.last_name}. Error: ${err}`)
+        throw new Error(`Could not update new user ${u.first_name+' '+u.last_name}. Error: ${err}`)
     }
   }
 
@@ -85,9 +89,9 @@ export class UserStore {
         const conn = await Client.connect()
         const sql = 'DELETE FROM users WHERE id=($1)'
         const result = await conn.query(sql, [id])
-        const User = result.rows[0]
+        const user = result.rows[0]
         conn.release()
-        return User
+        return user
     } 
     catch (err) {
         throw new Error(`Could not delete user ${id}. Error: ${err}`)

@@ -31,7 +31,6 @@ if(ENV === 'dev') {
     password: POSTGRES_PASSWORD,
   })
   console.log('dev')
-
 }
 
 export default Client;
