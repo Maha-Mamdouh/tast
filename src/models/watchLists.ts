@@ -28,7 +28,6 @@ export class userList {
         const conn = await Client.connect()
         const sql = 'SELECT * FROM user_list WHERE id=($1)'
         const result = await conn.query(sql, [id])
-        console.log(result)
         conn.release()
         if(result.rows[0] ==undefined) {
             return `Could not find id ${id} in empty table`

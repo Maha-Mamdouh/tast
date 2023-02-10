@@ -29,7 +29,6 @@ export class MovieStore {
         const conn = await Client.connect()
         const sql = 'SELECT * FROM movies WHERE id=($1)'
         const result = await conn.query(sql, [id])
-        console.log(result)
         conn.release()
         if(result.rows[0] ==undefined){
             throw new Error(`Could not find movie ${id} in empty table`)
@@ -63,11 +62,9 @@ export class MovieStore {
     try {
         // @ts-ignore
         const conn = await Client.connect() 
-        console.log(conn)      
         const sql ='Update movies set name = $2,release_date = $3 where id =$1  RETURNING *'
         const result = await conn.query(sql, [m.id,m.name, m.release_date])
         const movie = result.rows[0]
-        console.log(movie)
         conn.release()
         return movie
     }

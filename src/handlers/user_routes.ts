@@ -40,7 +40,6 @@ const destroy = async (req: Request, res: Response) => {
 const update = async (req: Request, res: Response) => {
     try {
         //p.first_name, p.last_name, p.balance,p.email,p.password
-        console.log('here')
         const user: User = {
             id: (req.params.id as unknown) as number,
             first_name: req.body.first_name,
@@ -49,7 +48,6 @@ const update = async (req: Request, res: Response) => {
             email: req.body.email,
             password:req.body.password
         }
-        console.log(user)
         const updateUser = await store.update(user)
         res.json(updateUser)
     } catch(err) {

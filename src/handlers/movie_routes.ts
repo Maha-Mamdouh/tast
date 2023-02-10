@@ -39,7 +39,6 @@ const update = async (req: Request, res: Response) => {
             name: req.body.name,
             release_date: req.body.release_date
         }
-        console.log(movie)
         const updateMovie = await store.update(movie)
         res.json(updateMovie)
     } catch(err) {

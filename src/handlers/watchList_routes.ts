@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import { List, userList } from '../models/lists'
+import { List, userList } from '../models/watchLists'
 
 const store = new userList()
 
@@ -14,8 +14,8 @@ const show = async (req: Request, res: Response) => {
 }
 
 const MovieRoutes = (app: express.Application) => {
-  app.get('/userlist', index)
-  app.get('/userlist/:id', show)
+  app.get('/watchlist', index)
+  app.get('/watchlist/:id', show)
 }
 
 export default MovieRoutes 

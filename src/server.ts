@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import UserRoutes from './handlers/user_routes';
 import MovieRoutes from './handlers/movie_routes';
-import ListRoutes from './handlers/list_routes';
+import ListRoutes from './handlers/watchList_routes';
 
 const app: express.Application = express();
 const address: string = "0.0.0.0:3000";

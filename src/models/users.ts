@@ -33,7 +33,6 @@ export class UserStore {
         const conn = await Client.connect()
         const sql = 'SELECT * FROM users WHERE id=($1)'
         const result = await conn.query(sql, [id])
-        console.log(result)
         conn.release()
         if(result.rows[0] ==undefined){
             throw new Error(`Could not find user ${id} empty table`)
@@ -68,13 +67,11 @@ export class UserStore {
     try {
         // @ts-ignore
         const conn = await Client.connect() 
-        console.log(conn)      
         //     id,first_name,last_name,balance,email,password
         const sql ='Update users set first_name = $2,last_name = $3 , balance= $4,email= $5,password= $6 where id =$1  RETURNING *'
 
         const result = await conn.query(sql, [u.id,u.first_name, u.last_name, u.balance,u.email,u.password])
         const user = result.rows[0]
-        console.log(user)
         conn.release()
         return user
     }
