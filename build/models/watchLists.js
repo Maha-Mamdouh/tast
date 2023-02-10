@@ -85,7 +85,7 @@ var userList = /** @class */ (function () {
                         result = _a.sent();
                         conn.release();
                         if (result.rows[0] == undefined) {
-                            return [2 /*return*/, "Could not find id ".concat(id, " in empty table")];
+                            return [2 /*return*/, "Could not find id ".concat(id, ". Empty table")];
                         }
                         else {
                             return [2 /*return*/, result.rows[0]];
@@ -94,6 +94,81 @@ var userList = /** @class */ (function () {
                     case 3:
                         err_2 = _a.sent();
                         throw new Error("Could not find id=".concat(id, ". Error: ").concat(err_2));
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    userList.prototype.create = function (l) {
+        return __awaiter(this, void 0, void 0, function () {
+            var conn, sql, result, user, err_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, database_1["default"].connect()];
+                    case 1:
+                        conn = _a.sent();
+                        sql = 'INSERT INTO user_list (user_id, movie_id) VALUES($1, $2) RETURNING *';
+                        return [4 /*yield*/, conn.query(sql, [l.user_id, l.movie_id])];
+                    case 2:
+                        result = _a.sent();
+                        user = result.rows[0];
+                        conn.release();
+                        return [2 /*return*/, user];
+                    case 3:
+                        err_3 = _a.sent();
+                        throw new Error("Could not add  movie with id ".concat(l.movie_id, " to user ").concat(l.user_id, ". Error: ").concat(err_3));
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    userList.prototype.update = function (l) {
+        return __awaiter(this, void 0, void 0, function () {
+            var conn, sql, result, user, err_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, database_1["default"].connect()];
+                    case 1:
+                        conn = _a.sent();
+                        sql = 'Update user_list set user_id = $2, movie_id = $3 WHERE id =$1 RETURNING *';
+                        return [4 /*yield*/, conn.query(sql, [l.id, l.user_id, l.movie_id])];
+                    case 2:
+                        result = _a.sent();
+                        user = result.rows[0];
+                        conn.release();
+                        return [2 /*return*/, user];
+                    case 3:
+                        err_4 = _a.sent();
+                        throw new Error("Could not update new movie with id ".concat(l.movie_id, " to user ").concat(l.user_id, ". Error: ").concat(err_4));
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    userList.prototype["delete"] = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var conn, sql, result, user, err_5;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, database_1["default"].connect()];
+                    case 1:
+                        conn = _a.sent();
+                        sql = 'DELETE FROM user_list WHERE id=($1)';
+                        return [4 /*yield*/, conn.query(sql, [id])];
+                    case 2:
+                        result = _a.sent();
+                        user = result.rows[0];
+                        conn.release();
+                        return [2 /*return*/, user];
+                    case 3:
+                        err_5 = _a.sent();
+                        throw new Error("Could not delete watched entity with id= ".concat(id, ". Error: ").concat(err_5));
                     case 4: return [2 /*return*/];
                 }
             });

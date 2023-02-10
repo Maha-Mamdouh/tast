@@ -129,11 +129,11 @@ var update = function (req, res) { return __awaiter(void 0, void 0, void 0, func
         }
     });
 }); };
-var UserRoutes = function (app) {
+var userRoutes = function (app) {
     app.get('/users', index);
     app.get('/users/:id', show);
     app.post('/users', create);
     app["delete"]('/users/:id', destroy);
     app.patch('/users/:id', update);
 };
-exports["default"] = UserRoutes;
+exports["default"] = userRoutes;

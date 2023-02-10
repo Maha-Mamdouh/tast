@@ -48,7 +48,7 @@ const update = async (req: Request, res: Response) => {
 }
 
 
-const MovieRoutes = (app: express.Application) => {
+const movieRoutes = (app: express.Application) => {
   app.get('/movies', index)
   app.get('/movies/:id', show)
   app.post('/movies', create)
@@ -56,4 +56,4 @@ const MovieRoutes = (app: express.Application) => {
   app.patch('/movies/:id', update)
 }
 
-export default MovieRoutes 
+export default movieRoutes 

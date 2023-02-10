@@ -15,7 +15,6 @@ const show = async (req: Request, res: Response) => {
 
 const create = async (req: Request, res: Response) => {
     try {
-        //p.first_name, p.last_name, p.balance,p.email,p.password
         const user: User = {
             first_name: req.body.first_name,
             last_name: req.body.last_name,
@@ -57,7 +56,7 @@ const update = async (req: Request, res: Response) => {
 }
 
 
-const UserRoutes = (app: express.Application) => {
+const userRoutes = (app: express.Application) => {
   app.get('/users', index)
   app.get('/users/:id', show)
   app.post('/users', create)
@@ -65,4 +64,4 @@ const UserRoutes = (app: express.Application) => {
   app.patch('/users/:id', update)
 }
 
-export default UserRoutes 
+export default userRoutes 

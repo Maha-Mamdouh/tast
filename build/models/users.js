@@ -111,7 +111,7 @@ var UserStore = /** @class */ (function () {
                         ];
                     case 1:
                         conn = _a.sent();
-                        sql = 'INSERT INTO users ( first_name,last_name,balance,email,password) VALUES($1, $2, $3, $4) RETURNING *';
+                        sql = 'INSERT INTO users ( first_name, last_name, balance, email, password) VALUES($1, $2, $3, $4, $5) RETURNING *';
                         return [4 /*yield*/, conn.query(sql, [u.first_name, u.last_name, u.balance, u.email, u.password])];
                     case 2:
                         result = _a.sent();
@@ -138,7 +138,7 @@ var UserStore = /** @class */ (function () {
                         ];
                     case 1:
                         conn = _a.sent();
-                        sql = 'Update users set first_name = $2,last_name = $3 , balance= $4,email= $5,password= $6 where id =$1  RETURNING *';
+                        sql = 'Update users set first_name = $2, last_name = $3 , balance= $4, email= $5, password= $6 where id =$1  RETURNING *';
                         return [4 /*yield*/, conn.query(sql, [u.id, u.first_name, u.last_name, u.balance, u.email, u.password])];
                     case 2:
                         result = _a.sent();
@@ -147,7 +147,7 @@ var UserStore = /** @class */ (function () {
                         return [2 /*return*/, user];
                     case 3:
                         err_4 = _a.sent();
-                        throw new Error("Could not update new user ".concat(u.first_name + ' ' + u.last_name, ". Error: ").concat(err_4));
+                        throw new Error("Could not update new user ".concat(u.first_name, " ").concat(u.last_name, ". Error: ").concat(err_4));
                     case 4: return [2 /*return*/];
                 }
             });

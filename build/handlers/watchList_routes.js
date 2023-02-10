@@ -37,12 +37,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var watchLists_1 = require("../models/watchLists");
-var list = new watchLists_1.userList();
+var lst = new watchLists_1.userList();
 var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var movies;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, list.index()];
+            case 0: return [4 /*yield*/, lst.index()];
             case 1:
                 movies = _a.sent();
                 res.json(movies);
@@ -54,7 +54,7 @@ var show = function (req, res) { return __awaiter(void 0, void 0, void 0, functi
     var movie;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, list.show(req.params.id)];
+            case 0: return [4 /*yield*/, lst.show(req.params.id)];
             case 1:
                 movie = _a.sent();
                 res.json(movie);
@@ -62,8 +62,72 @@ var show = function (req, res) { return __awaiter(void 0, void 0, void 0, functi
         }
     });
 }); };
-var MovieRoutes = function (app) {
+var create = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var movie, newMovie, err_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                movie = {
+                    user_id: req.body.user_id,
+                    movie_id: req.body.movie_id
+                };
+                return [4 /*yield*/, lst.create(movie)];
+            case 1:
+                newMovie = _a.sent();
+                res.json(newMovie);
+                return [3 /*break*/, 3];
+            case 2:
+                err_1 = _a.sent();
+                res.status(400);
+                res.json(err_1);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+var destroy = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var deleted;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, lst["delete"](req.body.id)];
+            case 1:
+                deleted = _a.sent();
+                res.json(deleted);
+                return [2 /*return*/];
+        }
+    });
+}); };
+var update = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var movie, updateMovie, err_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                movie = {
+                    id: req.params.id,
+                    user_id: req.body.user_id,
+                    movie_id: req.body.movie_id
+                };
+                return [4 /*yield*/, lst.update(movie)];
+            case 1:
+                updateMovie = _a.sent();
+                res.json(updateMovie);
+                return [3 /*break*/, 3];
+            case 2:
+                err_2 = _a.sent();
+                res.status(400);
+                res.json(err_2);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+var listRoutes = function (app) {
     app.get('/watchlist', index);
     app.get('/watchlist/:id', show);
+    app.post('/watchlist', create);
+    app["delete"]('/watchlist/:id', destroy);
+    app.patch('/watchlist/:id', update);
 };
-exports["default"] = MovieRoutes;
+exports["default"] = listRoutes;

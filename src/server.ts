@@ -1,8 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import UserRoutes from './handlers/user_routes';
-import MovieRoutes from './handlers/movie_routes';
-import ListRoutes from './handlers/watchList_routes';
+import userRoutes from './handlers/user_routes';
+import movieRoutes from './handlers/movie_routes';
+import listRoutes from './handlers/watchList_routes';
 
 const app: express.Application = express();
 const address: string = "0.0.0.0:3000";
@@ -13,9 +13,9 @@ app.get('/', function (req: express.Request, res: express.Response) {
     res.send('Hello World!')
 });
 
-UserRoutes(app)
-MovieRoutes(app)
-ListRoutes(app)
+userRoutes(app)
+movieRoutes(app)
+listRoutes(app)
 
 app.listen(3000, function () {
     console.log(`starting app on: ${address}`)

@@ -123,11 +123,11 @@ var update = function (req, res) { return __awaiter(void 0, void 0, void 0, func
         }
     });
 }); };
-var MovieRoutes = function (app) {
+var movieRoutes = function (app) {
     app.get('/movies', index);
     app.get('/movies/:id', show);
     app.post('/movies', create);
     app["delete"]('/movies/:id', destroy);
     app.patch('/movies/:id', update);
 };
-exports["default"] = MovieRoutes;
+exports["default"] = movieRoutes;
