@@ -15,13 +15,15 @@ const show = async (req: Request, res: Response) => {
 
 const create = async (req: Request, res: Response) => {
   try {
-      const movie: List = {
+      const list: List = {
         user_id: req.body.user_id,
         movie_id: req.body.movie_id
       }
-      const newMovie = await lst.create(movie)
-      res.json(newMovie)
+      const newEntity = await lst.create(list)
+      res.json(newEntity)
+      console.log(newEntity)
   } catch(err) {
+      console.log(err)
       res.status(400)
       res.json(err)
   }

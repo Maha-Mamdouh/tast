@@ -63,22 +63,24 @@ var show = function (req, res) { return __awaiter(void 0, void 0, void 0, functi
     });
 }); };
 var create = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var movie, newMovie, err_1;
+    var list, newEntity, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                movie = {
+                list = {
                     user_id: req.body.user_id,
                     movie_id: req.body.movie_id
                 };
-                return [4 /*yield*/, lst.create(movie)];
+                return [4 /*yield*/, lst.create(list)];
             case 1:
-                newMovie = _a.sent();
-                res.json(newMovie);
+                newEntity = _a.sent();
+                res.json(newEntity);
+                console.log(newEntity);
                 return [3 /*break*/, 3];
             case 2:
                 err_1 = _a.sent();
+                console.log(err_1);
                 res.status(400);
                 res.json(err_1);
                 return [3 /*break*/, 3];
