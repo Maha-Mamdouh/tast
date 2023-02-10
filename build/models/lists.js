@@ -39,13 +39,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 exports.__esModule = true;
-exports.UserStore = void 0;
+exports.userList = void 0;
 // @ts-ignore
 var database_1 = __importDefault(require("../database"));
-var UserStore = /** @class */ (function () {
-    function UserStore() {
+var userList = /** @class */ (function () {
+    function userList() {
     }
-    UserStore.prototype.index = function () {
+    userList.prototype.index = function () {
         return __awaiter(this, void 0, void 0, function () {
             var conn, sql, result, err_1;
             return __generator(this, function (_a) {
@@ -55,7 +55,7 @@ var UserStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'SELECT * FROM users';
+                        sql = 'SELECT * FROM user_list';
                         return [4 /*yield*/, conn.query(sql)];
                     case 2:
                         result = _a.sent();
@@ -63,13 +63,13 @@ var UserStore = /** @class */ (function () {
                         return [2 /*return*/, result.rows];
                     case 3:
                         err_1 = _a.sent();
-                        throw new Error("Could not get users. Error: ".concat(err_1));
+                        throw new Error("Could not acces the list. Error: ".concat(err_1));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    UserStore.prototype.show = function (id) {
+    userList.prototype.show = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             var conn, sql, result, err_2;
             return __generator(this, function (_a) {
@@ -79,14 +79,14 @@ var UserStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'SELECT * FROM users WHERE id=($1)';
+                        sql = 'SELECT * FROM user_list WHERE id=($1)';
                         return [4 /*yield*/, conn.query(sql, [id])];
                     case 2:
                         result = _a.sent();
                         console.log(result);
                         conn.release();
                         if (result.rows[0] == undefined) {
-                            throw new Error("Could not find user ".concat(id, " empty table"));
+                            return [2 /*return*/, "Could not find id ".concat(id, " in empty table")];
                         }
                         else {
                             return [2 /*return*/, result.rows[0]];
@@ -94,91 +94,12 @@ var UserStore = /** @class */ (function () {
                         return [3 /*break*/, 4];
                     case 3:
                         err_2 = _a.sent();
-                        throw new Error("Could not find user ".concat(id, ". Error: ").concat(err_2));
+                        throw new Error("Could not find id=".concat(id, ". Error: ").concat(err_2));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    UserStore.prototype.create = function (u) {
-        return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result, user, err_3;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 3, , 4]);
-                        return [4 /*yield*/, database_1["default"].connect()
-                            //     id,first_name,last_name,balance,email,password
-                        ];
-                    case 1:
-                        conn = _a.sent();
-                        sql = 'INSERT INTO users ( first_name,last_name,balance,email,password) VALUES($1, $2, $3, $4) RETURNING *';
-                        return [4 /*yield*/, conn.query(sql, [u.first_name, u.last_name, u.balance, u.email, u.password])];
-                    case 2:
-                        result = _a.sent();
-                        user = result.rows[0];
-                        conn.release();
-                        return [2 /*return*/, user];
-                    case 3:
-                        err_3 = _a.sent();
-                        throw new Error("Could not add new user ".concat(u.first_name + ' ' + u.last_name, ". Error: ").concat(err_3));
-                    case 4: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    UserStore.prototype.update = function (u) {
-        return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result, user, err_4;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 3, , 4]);
-                        return [4 /*yield*/, database_1["default"].connect()];
-                    case 1:
-                        conn = _a.sent();
-                        console.log(conn);
-                        sql = 'Update users set first_name = $2,last_name = $3 , balance= $4,email= $5,password= $6 where id =$1  RETURNING *';
-                        return [4 /*yield*/, conn.query(sql, [u.id, u.first_name, u.last_name, u.balance, u.email, u.password])];
-                    case 2:
-                        result = _a.sent();
-                        user = result.rows[0];
-                        console.log(user);
-                        conn.release();
-                        return [2 /*return*/, user];
-                    case 3:
-                        err_4 = _a.sent();
-                        throw new Error("Could not update new user ".concat(u.first_name + ' ' + u.last_name, ". Error: ").concat(err_4));
-                    case 4: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    UserStore.prototype["delete"] = function (id) {
-        return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result, user, err_5;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 3, , 4]);
-                        return [4 /*yield*/, database_1["default"].connect()];
-                    case 1:
-                        conn = _a.sent();
-                        sql = 'DELETE FROM users WHERE id=($1)';
-                        return [4 /*yield*/, conn.query(sql, [id])];
-                    case 2:
-                        result = _a.sent();
-                        user = result.rows[0];
-                        conn.release();
-                        return [2 /*return*/, user];
-                    case 3:
-                        err_5 = _a.sent();
-                        throw new Error("Could not delete user ".concat(id, ". Error: ").concat(err_5));
-                    case 4: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    return UserStore;
+    return userList;
 }());
-exports.UserStore = UserStore;
+exports.userList = userList;
