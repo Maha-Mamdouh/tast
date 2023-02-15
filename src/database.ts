@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 import {Pool} from 'pg'
 
-dotenv.config({ debug: true })
+dotenv.config({ debug: true, override: true })
 
 const {
     POSTGRES_HOST,
