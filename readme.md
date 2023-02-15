@@ -1,6 +1,7 @@
 # Streaming API
 
- .....about project
+Full Stack Nanodegree Web Competition Egypt-FWD T3C16 - January 23 Cohort
+
 
 ## Getting Started
 
